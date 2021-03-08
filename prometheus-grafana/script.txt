@@ -11,6 +11,5 @@ wget https://raw.githubusercontent.com/DGU-AILab/Infra/master/prometheus-grafana
 sudo mv prometheus-daemon /etc/systemd/system/prometheus.service
 sudo systemctl daemon-reload
 sudo systemctl start prometheus
-sudo systemctl status prometheus
 sudo apt update
 sudo apt install prometheus-node-exporter
