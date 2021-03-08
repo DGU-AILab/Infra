@@ -1,0 +1,16 @@
+#!/bin/bash
+wget https://github.com/prometheus/prometheus/releases/download/v2.18.1/prometheus-2.18.1.linux-amd64.tar.gz
+tar xvfz prometheus-2.18.1.linux-amd64.tar.gz
+sudo mv prometheus-2.18.1.linux-amd64 /etc
+sudo groupadd -r prometheus
+sudo useradd -r -g prometheus -s /sbin/nologin -m prometheus
+sudo chown -R prometheus:prometheus -R /home/prometheus/
+wget https://raw.githubusercontent.com/DGU-AILab/Infra/master/prometheus-grafana/prometheus.yml
+sudo mv prometheus.yml /home/prometheus/prometheus.yml
+wget https://raw.githubusercontent.com/DGU-AILab/Infra/master/prometheus-grafana/prometheus-daemon
+sudo mv prometheus-daemon /etc/systemd/system/prometheus.service
+sudo systemctl daemon-reload
+sudo systemctl start prometheus
+sudo systemctl status prometheus
+sudo apt update
+sudo apt install prometheus-node-exporter
